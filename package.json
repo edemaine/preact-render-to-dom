@@ -1,6 +1,6 @@
 {
   "name": "preact-render-to-dom",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Render Preact VDOM directly to DOM/xmldom/jsdom",
   "repository": {
     "type": "git",
@@ -19,6 +19,13 @@
   "type": "module",
   "main": "index.cjs",
   "module": "index.js",
+  "files": [
+    "index.coffee",
+    "index.cjs",
+    "index.js",
+    "test.coffee",
+    "test.js"
+  ],
   "scripts": {
     "prepare": "coffee -c . && cp index.js index.cjs && ej --write index.cjs",
     "test": "npm run prepare && node test.js"
