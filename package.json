@@ -17,9 +17,10 @@
   },
   "license": "MIT",
   "type": "module",
-  "main": "index.js",
+  "main": "index.cjs",
+  "module": "index.js",
   "scripts": {
-    "prepare": "coffee -c .",
+    "prepare": "coffee -c . && cp index.js index.cjs && ej --write index.cjs",
     "test": "npm run prepare && node test.js"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@xmldom/xmldom": "0.8.3",
+    "esm-cjs": "0.1.2",
     "jsdom": "20.0.1",
     "preact-render-to-string": "5.2.5"
   }
