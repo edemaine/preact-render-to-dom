@@ -55,6 +55,15 @@ for {name, renderer, parser, stringify, reps} in [
   console.log "Double conversion: #{(doubleConvert - nothingConvert) / reps * 1000}us"
   console.log "Speedup:", doubleConvert / directConvert
 
+  xml = renderToString vdom
+  before = performance.now()
+  for [0...reps]
+    dom = parser xml
+  after = performance.now()
+  justParse = after - before
+  console.log "Just parsing: #{(justParse - nothingConvert) / reps * 1000}us"
+  console.log "Speedup:", justParse / directConvert
+
   console.log()
   console.log directXML
   unless directXML == doubleXML
