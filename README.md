@@ -12,9 +12,13 @@ implementation of real DOM, specifically one of:
 * [xmldom](https://github.com/xmldom/xmldom)
 * [jsdom](https://github.com/jsdom/jsdom)
 
-Compared to running `preact-render-to-string` followed by parsing via
-`xmldom` or `jsdom`, this package is ~7x or ~25x faster, respectively.
+Compared to rendering via preact-render-to-string, followed by parsing via
+xmldom or jsdom, this package is ~7x or ~25x faster, respectively.
 Try `npm test` yourself!
+
+[SVG Tiler](https://github.com/edemaine/svgtiler) uses this package
+to more quickly convert Preact VDOM to xmldom intermediate form
+used to compose the entire document, before rendering everything to a file.
 
 ## Usage
 
