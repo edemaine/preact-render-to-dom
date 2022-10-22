@@ -1,0 +1,32 @@
+{
+  "name": "preact-render-to-dom",
+  "version": "0.0.0",
+  "description": "Render Preact VDOM directly to DOM/xmldom/jsdom",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edemaine/preact-render-to-dom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edemaine/preact-render-to-dom/issues"
+  },
+  "homepage": "https://github.com/edemaine/preact-render-to-dom",
+  "author": {
+    "name": "Erik Demaine",
+    "email": "edemaine@mit.edu",
+    "url": "https://erikdemaine.org/"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "coffee -c .",
+    "test": "npm run prepare && node test.js"
+  },
+  "dependencies": {
+    "preact": "10.11.2"
+  },
+  "devDependencies": {
+    "preact-render-to-string": "5.2.5",
+    "@xmldom/xmldom": "0.8.3"
+  }
+}
