@@ -128,9 +128,9 @@ normalizePropValue = (name, v) ->
     v
 
 export class RenderToDom
-  constructor: (@document = document) ->
+  constructor: (@document = document, @options = {}) ->
 
-  render: (vnode, context = {}, opts = {}) ->
+  render: (vnode, context = {}) ->
     # Don't execute any effects by passing an empty array to `options[COMMIT]`.
     # Further avoid dirty checks and allocations by setting
     # `options[SKIP_EFFECTS]` too.
@@ -140,7 +140,7 @@ export class RenderToDom
     parent = h Fragment, null
     parent[CHILDREN] = [vnode]
 
-    dom = @recurse vnode, context, opts.isSvgMode ? false, undefined, parent
+    dom = @recurse vnode, context, @options.svg ? false, undefined, parent
     options[COMMIT]? vnode, []
     options[SKIP_EFFECTS] = previousSkipEffects
     dom
@@ -200,7 +200,8 @@ export class RenderToDom
       return dom
 
     # Render Element VNodes to DOM
-    if @document.createElementNS? and isSvgMode or type == 'svg'
+    if not @options.skipNS and @document.createElementNS? and
+       isSvgMode or type == 'svg'
       dom = @document.createElementNS SVGNS, type
     else
       dom = @document.createElement type
@@ -270,10 +271,10 @@ export class RenderToDom
     dom
 
 export class RenderToXMLDom extends RenderToDom
-  constructor: (xmldom) ->
-    super new xmldom.DOMImplementation().createDocument()
+  constructor: (xmldom, options) ->
+    super new xmldom.DOMImplementation().createDocument(), options
 
 export class RenderToJSDom extends RenderToDom
-  constructor: (jsdom) ->
+  constructor: (jsdom, options) ->
     jsdom = jsdom.JSDOM if jsdom.JSDOM?
-    super new jsdom('<!DOCTYPE html>').window.document
+    super new jsdom('<!DOCTYPE html>').window.document, options

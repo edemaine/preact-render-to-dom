@@ -7,7 +7,7 @@ import jsdom from 'jsdom'
 xmldomDOMParser = new xmldom.DOMParser()
 for {name, renderer, parser, stringify, reps} in [
   name: 'xmldom'
-  renderer: new RenderToXMLDom xmldom
+  renderer: new RenderToXMLDom xmldom, skipNS: true
   parser: (text) -> xmldomDOMParser.parseFromString text, 'image/svg+xml'
   stringify: (dom) -> new xmldom.XMLSerializer().serializeToString dom
   reps: 100000
