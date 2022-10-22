@@ -1,5 +1,7 @@
 import {h, options, Fragment} from 'preact'
 
+SVGNS = 'http://www.w3.org/2000/svg'
+
 ## https://github.com/preactjs/preact-render-to-string/blob/master/src/constants.js
 DIFF = '__b'
 RENDER = '__r'
@@ -198,7 +200,10 @@ export class RenderToDom
       return dom
 
     # Render Element VNodes to DOM
-    dom = @document.createElement type
+    if @document.createElementNS? and isSvgMode or type == 'svg'
+      dom = @document.createElementNS SVGNS, type
+    else
+      dom = @document.createElement type
     if props?
       {children} = props
       for name, val of props
@@ -267,3 +272,8 @@ export class RenderToDom
 export class RenderToXMLDom extends RenderToDom
   constructor: (xmldom) ->
     super new xmldom.DOMImplementation().createDocument()
+
+export class RenderToJSDom extends RenderToDom
+  constructor: (jsdom) ->
+    jsdom = jsdom.JSDOM if jsdom.JSDOM?
+    super new jsdom('<!DOCTYPE html>').window.document

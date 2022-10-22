@@ -26,7 +26,8 @@
     "preact": "10.11.2"
   },
   "devDependencies": {
-    "preact-render-to-string": "5.2.5",
-    "@xmldom/xmldom": "0.8.3"
+    "@xmldom/xmldom": "0.8.3",
+    "jsdom": "20.0.1",
+    "preact-render-to-string": "5.2.5"
   }
 }
