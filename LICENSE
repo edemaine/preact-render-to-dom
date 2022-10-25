@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2022 Erik Demaine
+Copyright (c) 2015 Jason Miller [preact-render-to-string]
+Copyright (c) 2022 Erik Demaine [preact-render-to-dom]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
