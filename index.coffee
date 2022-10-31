@@ -128,7 +128,26 @@ normalizePropValue = (name, v) ->
     v
 
 export class RenderToDom
-  constructor: (@document = document, @options = {}) ->
+  constructor: (@options = {}) ->
+    @document = @options.document ? document
+    if @options.DOMParser?
+      @DOMParser = new @options.DOMParser
+
+  setInnerHTML: (node, html, isSvgMode) ->
+    if node.innerHTML?
+      node.innerHTML = html
+    else if @DOMParser?
+      # Wrap in document element (for multiple tags) and parse
+      if isSvgMode
+        parsed = @DOMParser.parseFromString \
+          "<svg xmlns=\"#{SVGNS}\">#{html}</svg>", 'image/svg+xml'
+      else
+        parsed = @DOMParser.parseFromString \
+          "<html>#{html}</html>", 'text/html'
+      for child in (child for child in parsed.documentElement.childNodes)
+        node.appendChild child
+    else
+      throw new Error "RenderToDom: No innerHTML or DOMParser interface; pass DOMParser class via options"
 
   render: (vnode, context = {}) ->
     # Don't execute any effects by passing an empty array to `options[COMMIT]`.
@@ -243,23 +262,21 @@ export class RenderToDom
     if UNSAFE_NAME.test type
       throw new Error "#{type} is not a valid HTML tag name in #{s}"
 
+    childSvgMode =
+      type == 'svg' or (type != 'foreignObject' and isSvgMode)
     if html
-      dom.innerHTML = html
+      @setInnerHTML dom, html, childSvgMode
     else if typeof children == 'string'
-      dom.innerText = children
+      dom.appendChild @document.createTextNode children
     else if Array.isArray children
       vnode[CHILDREN] = children
       for child in children
         if child? and child != false
-          childSvgMode =
-            type == 'svg' or (type != 'foreignObject' and isSvgMode)
           ret = @recurse child, context, childSvgMode, selectValue, parent
           # Skip if we received an empty string
           dom.appendChild ret if ret
     else if children? and children not in [false, true]
       vnode[CHILDREN] = [children]
-      childSvgMode =
-        type == 'svg' or (type != 'foreignObject' and isSvgMode)
       ret = @recurse children, context, childSvgMode, selectValue, parent
       # Skip if we received an empty string
       dom.appendChild ret if ret
@@ -271,10 +288,16 @@ export class RenderToDom
     dom
 
 export class RenderToXMLDom extends RenderToDom
-  constructor: (xmldom, options) ->
-    super new xmldom.DOMImplementation().createDocument(), options
+  constructor: (options) ->
+    xmldom = options.xmldom
+    super {...options,
+      document: new xmldom.DOMImplementation().createDocument()
+      DOMParser: xmldom.DOMParser
+    }
 
 export class RenderToJSDom extends RenderToDom
-  constructor: (jsdom, options) ->
+  constructor: (options) ->
+    jsdom = options.jsdom
     jsdom = jsdom.JSDOM if jsdom.JSDOM?
-    super new jsdom('<!DOCTYPE html>').window.document, options
+    super {...options,
+      document: new jsdom('<!DOCTYPE html>').window.document}

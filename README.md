@@ -36,7 +36,7 @@ const dom = new RenderToDom().render(preactVDom);
 ```js
 import {RenderToXMLDom} from 'preact-render-to-dom';
 import xmldom from '@xmldom/xmldom';
-const dom = new RenderToXMLDom(xmldom).render(preactVDom);
+const dom = new RenderToXMLDom({xmldom}).render(preactVDom);
 ```
 
 ### jsdom
@@ -44,17 +44,26 @@ const dom = new RenderToXMLDom(xmldom).render(preactVDom);
 ```js
 import {RenderToJSDom} from 'preact-render-to-dom';
 import jsdom from 'jsdom';
-const dom = new RenderToJSDom(jsdom).render(preactVDom);
+const dom = new RenderToJSDom({jsdom}).render(preactVDom);
 ```
 
 ### Options
 
-The `RenderTo*Dom` classes support a second options argument,
+The `RenderTo*Dom` classes support a single options argument,
 which can have the following properties:
 
 * `svg: true`: start in SVG mode (not needed if top-level tag is `<svg>`)
 * `skipNS: true`: don't bother using `document.createElementNS` in SVG mode
   (saves time, and usually not needed with `xmldom` for example)
+* `RenderToDom` only:
+  * `document`: an interface like the browser's `document`
+    (defaults to `document` global if available)
+  * `DOMParser`: an interface like the browser's `DOMParser`
+    (needed only if nodes do not support the `innerHTML` interface)
+* `RenderToXMLDom` only:
+  * `xmldom`: the result of importing `@xmldom/xmldom`
+* `RenderToJSDom` only:
+  * `jsdom`: the result of importing `jsdom`, or the `JSDOM` class within
 
 ## License
 
