@@ -24,6 +24,9 @@ used to compose the entire document, before rendering everything to a file.
 
 See [test.coffee](test.coffee) for examples of usage.
 
+In the examples below, the resulting `dom` object should be a `Node`,
+specifically an `Element`, `DocumentFragment`, or `TextNode`.
+
 ### Real DOM
 
 ```js
