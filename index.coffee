@@ -165,8 +165,9 @@ export class RenderToDom
     dom
 
   recurse: (vnode, context, isSvgMode, selectValue, parent) ->
-    # null, undefined, true, false, '' render as nothing
-    return if not vnode? or vnode in [true, false, '']
+    # null, undefined, true, false, '' render as empty fragment
+    if not vnode? or vnode in [true, false, '']
+      return @document.createDocumentFragment()
 
     # Text VNodes get escaped as HTML
     unless typeof vnode == 'object'

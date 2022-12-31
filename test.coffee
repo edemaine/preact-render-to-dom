@@ -1,5 +1,5 @@
 import {RenderToXMLDom, RenderToJSDom} from './index.js'
-import {h} from 'preact'
+import {h, Fragment} from 'preact'
 import {renderToString} from 'preact-render-to-string'
 import xmldom from '@xmldom/xmldom'
 import jsdom from 'jsdom'
@@ -25,6 +25,7 @@ for {name, renderer, parser, stringify, reps} in [
     h 'g', {id: 'g1'}, [
       h 'rect', {id: 'rect1', x: 0, y: 0, width: 100, height: 100, fill: 'red'}
       h 'text', {y: 100, style: 'font-size: 50px'}, 'Hi'
+      h Fragment
     ],
     h 'use', {href: "#g1", x: 100, y: 100}
     ## For testing innerHTML:
