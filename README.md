@@ -13,7 +13,7 @@ implementation of real DOM, specifically one of:
 * [jsdom](https://github.com/jsdom/jsdom)
 
 Compared to rendering via preact-render-to-string, followed by parsing via
-xmldom or jsdom, this package is ~7x or ~25x faster, respectively.
+xmldom or jsdom, this package is ~4x or ~24x faster, respectively.
 Try `npm test` yourself!
 
 [SVG Tiler](https://github.com/edemaine/svgtiler) uses this package
@@ -74,4 +74,4 @@ The code is released under an [MIT license](LICENSE), the same license as
 [preact-render-to-string](https://github.com/preactjs/preact-render-to-string)
 on which this code is heavily based.
 
-Last modeled after [this preact-render-to-string commit](https://github.com/preactjs/preact-render-to-string/commit/1aaf2fe22cd62871b7f7692475eca109c630951d).
+Last modeled after [this preact-render-to-string commit](https://github.com/preactjs/preact-render-to-string/commit/bd818dcdeb521f75d316546d102e1f0998405929).

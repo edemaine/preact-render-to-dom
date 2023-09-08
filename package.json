@@ -31,12 +31,12 @@
     "test": "npm run prepare && node test.js"
   },
   "dependencies": {
-    "preact": "10.11.2"
+    "preact": "^10.17.1"
   },
   "devDependencies": {
-    "@xmldom/xmldom": "0.8.3",
+    "@xmldom/xmldom": "0.8.10",
     "esm-cjs": "0.1.2",
-    "jsdom": "20.0.1",
-    "preact-render-to-string": "5.2.5"
+    "jsdom": "22.1.0",
+    "preact-render-to-string": "6.2.1"
   }
 }
