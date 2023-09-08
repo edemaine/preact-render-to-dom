@@ -27,7 +27,7 @@ for {name, renderer, parser, stringify, reps} in [
       h 'text', {y: 100, style: 'font-size: 50px'}, 'Hi'
       h Fragment
     ],
-    h 'use', {href: "#g1", x: 100, y: 100}
+    h 'use', {"xlink:href": "#g1", x: 100, y: 100}
     ## For testing innerHTML:
     #h 'desc', {dangerouslySetInnerHTML: {__html:
     #  'Made with <a href="https://github.com/edemaine/preact-render-to-dom">preact-render-to-dom</a>'}}

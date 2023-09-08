@@ -28,7 +28,7 @@ createComponent = (vnode, context) ->
   [DIRTY]: true
   [HOOKS]: []
 UNSAFE_NAME = /[\s\n\\/='"\0<>]/
-NAMESPACE_REPLACE_REGEX = /^(xlink|xmlns|xml)(:|[A-Z])/
+NAMESPACE_REPLACE_REGEX = /^(xlink|xmlns|xml)([A-Z])/
 HTML_LOWER_CASE = /^accessK|^auto[A-Z]|^ch|^col|cont|cross|dateT|encT|form[A-Z]|frame|hrefL|inputM|maxL|minL|noV|playsI|readO|rowS|spellC|src[A-Z]|tabI|item[A-Z]/
 SVG_CAMEL_CASE = /^ac|^ali|arabic|basel|cap|clipPath$|clipRule$|color|dominant|enable|fill|flood|font|glyph[^R]|horiz|image|letter|lighting|marker[^WUH]|overline|panose|pointe|paint|rendering|shape|stop|strikethrough|stroke|text[^L]|transform|underline|unicode|units|^v[^i]|^w|^xH/
 
