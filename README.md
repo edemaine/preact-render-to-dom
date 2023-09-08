@@ -73,3 +73,5 @@ which can have the following properties:
 The code is released under an [MIT license](LICENSE), the same license as
 [preact-render-to-string](https://github.com/preactjs/preact-render-to-string)
 on which this code is heavily based.
+
+Last modeled after [this preact-render-to-string commit](https://github.com/preactjs/preact-render-to-string/commit/1aaf2fe22cd62871b7f7692475eca109c630951d).
