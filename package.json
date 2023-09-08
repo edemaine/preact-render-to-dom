@@ -1,6 +1,6 @@
 {
   "name": "preact-render-to-dom",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render Preact VDOM directly to DOM/xmldom/jsdom",
   "repository": {
     "type": "git",
